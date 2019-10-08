@@ -147,7 +147,7 @@ public class WaitForSeconds : IWait
 ```
 
 ### 1.3.4 类 WaitForSeconds
-```
+```C#
 public class CoroutineManager
 {
     private static CoroutineManager instance = null;
