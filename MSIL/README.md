@@ -1,25 +1,22 @@
 
 <!-- TOC -->
 
-- [[1 MSIL 指令笔记](Instruction/README.md)](#1-msil-指令笔记instructionreadmemd)
-- [2 ILDasm 使用](#2-ildasm-使用)
-    - [2.1 ILDasm 导入 VS](#21-ildasm-导入-vs)
-- [3 ILSpy 使用](#3-ilspy-使用)
-- [4 程序集深入了解](#4-程序集深入了解)
-    - [4.1 C#代码编译过程](#41-c代码编译过程)
-    - [4.2 代码分析](#42-代码分析)
-        - [4.2.1 IL 代码查看](#421-il-代码查看)
-        - [4.2.2 IL 代码分析](#422-il-代码分析)
-- [参考文章](#参考文章)
+- [[1 MSIL 指令笔记]](#1-msil-%e6%8c%87%e4%bb%a4%e7%ac%94%e8%ae%b0)
+- [2 ILDasm 使用](#2-ildasm-%e4%bd%bf%e7%94%a8)
+  - [2.1 ILDasm 导入 VS](#21-ildasm-%e5%af%bc%e5%85%a5-vs)
+- [3 ILSpy 使用](#3-ilspy-%e4%bd%bf%e7%94%a8)
+- [4 程序集深入了解](#4-%e7%a8%8b%e5%ba%8f%e9%9b%86%e6%b7%b1%e5%85%a5%e4%ba%86%e8%a7%a3)
+  - [4.1 C#代码编译过程](#41-c%e4%bb%a3%e7%a0%81%e7%bc%96%e8%af%91%e8%bf%87%e7%a8%8b)
+  - [4.2 代码分析](#42-%e4%bb%a3%e7%a0%81%e5%88%86%e6%9e%90)
+    - [4.2.1 IL 代码查看](#421-il-%e4%bb%a3%e7%a0%81%e6%9f%a5%e7%9c%8b)
+    - [4.2.2 IL 代码分析](#422-il-%e4%bb%a3%e7%a0%81%e5%88%86%e6%9e%90)
+- [参考文章](#%e5%8f%82%e8%80%83%e6%96%87%e7%ab%a0)
 
 <!-- /TOC -->
 
-# [1 MSIL 指令笔记](Instruction/README.md)
+# [1 MSIL 指令笔记]
+[MSIL 指令说明](Instruction/README.md),主要包含指令名，说明，内存操作顺序。
 
-
-| OpCodes  | Desc |
-| ------------- | ------------- |
-| Add  | 弹出 evaluation stack 上的数，相加后将结果压入 evaluation stack  |
 
 
 # 2 ILDasm 使用
