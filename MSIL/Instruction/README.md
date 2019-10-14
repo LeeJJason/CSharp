@@ -96,21 +96,21 @@
 - [~~Ldarg_2~~](#ldarg2)
 - [~~Ldarg_3~~](#ldarg3)
 - [~~Ldarg_S~~](#ldargs)
-- [~~Ldc_I4~~](#ldci4)
-- [~~Ldc_I4_0~~](#ldci40)
-- [~~Ldc_I4_1~~](#ldci41)
-- [~~Ldc_I4_2~~](#ldci42)
-- [~~Ldc_I4_3~~](#ldci43)
-- [~~Ldc_I4_4~~](#ldci44)
-- [~~Ldc_I4_5~~](#ldci45)
-- [~~Ldc_I4_6~~](#ldci46)
-- [~~Ldc_I4_7~~](#ldci47)
-- [~~Ldc_I4_8~~](#ldci48)
-- [~~Ldc_I4_M1~~](#ldci4m1)
-- [~~Ldc_I4_S~~](#ldci4s)
-- [~~Ldc_I8~~](#ldci8)
-- [~~Ldc_R4~~](#ldcr4)
-- [~~Ldc_R8~~](#ldcr8)
+- [Ldc_I4](#ldci4)
+- [Ldc_I4_0](#ldci40)
+- [Ldc_I4_1](#ldci41)
+- [Ldc_I4_2](#ldci42)
+- [Ldc_I4_3](#ldci43)
+- [Ldc_I4_4](#ldci44)
+- [Ldc_I4_5](#ldci45)
+- [Ldc_I4_6](#ldci46)
+- [Ldc_I4_7](#ldci47)
+- [Ldc_I4_8](#ldci48)
+- [Ldc_I4_M1](#ldci4m1)
+- [Ldc_I4_S](#ldci4s)
+- [Ldc_I8](#ldci8)
+- [Ldc_R4](#ldcr4)
+- [Ldc_R8](#ldcr8)
 - [~~Ldelem~~](#ldelem)
 - [~~Ldelema~~](#ldelema)
 - [~~Ldelem_I~~](#ldelemi)
@@ -151,7 +151,7 @@
 - [~~Ldobj~~](#ldobj)
 - [~~Ldsfld~~](#ldsfld)
 - [~~Ldsflda~~](#ldsflda)
-- [~~Ldstr~~](#ldstr)
+- [Ldstr](#ldstr)
 - [~~Ldtoken~~](#ldtoken)
 - [~~Ldvirtftn~~](#ldvirtftn)
 - [~~Leave~~](#leave)
@@ -517,50 +517,100 @@ Loads the argument at index 3 onto the evaluation stack.
 ## ~~Ldarg_S~~
 Loads the argument (referenced by a specified short form index) onto the evaluation stack.
 
-## ~~Ldc_I4~~
-Pushes a supplied value of type int32 onto the evaluation stack as an int32.
+## Ldc_I4
+将提供的 int32 类型的值以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 20 < int32 > |	ldc.i4 num |	将 num 压入 evaluation stack|
+1. -128 到 127 之间的数字用 [Ldc_I8](#ldci4s)更有效.
+2. -1 到 8 使用 [Ldc_I4_M1](#ldci4m1)(-1)、[Ldc_I4_0](#ldci40)(-1)、[Ldc_I4_1](#ldci41)(1)、[Ldc_I4_2](#ldci42)(2)、[Ldc_I4_3](#ldci43)(3)、[Ldc_I4_4](#ldci44)(4)、[Ldc_I4_5](#ldci45)(5)、[Ldc_I4_6](#ldci46)(6)、[Ldc_I4_7](#ldci47)(7)、[Ldc_I4_8](#ldci48)(8)
+3. 超过 32 位的数字用 [Ldc_I8](#ldci48).
+4. [Ldc_I4](#ldci4) 后面跟随 [Conv_I8](#convi8),数字需要 9 到 32位
+5. 其他 Ldc_I* 后面跟随 [Conv_I8](#convi8),数字为任意
 
-## ~~Ldc_I4_0~~
-Pushes the integer value of 0 onto the evaluation stack as an int32.
+## Ldc_I4_0
+将参数 0 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 16 |	ldc.i4.0 |	将 0 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_1~~
-Pushes the integer value of 1 onto the evaluation stack as an int32.
+## Ldc_I4_1
+将参数 1 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 17 |	ldc.i4.1 |	将 1 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_2~~
-Pushes the integer value of 2 onto the evaluation stack as an int32.
+## Ldc_I4_2
+将参数 2 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 18 |	ldc.i4.2 |	将 2 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_3~~
-Pushes the integer value of 3 onto the evaluation stack as an int32.
+## Ldc_I4_3
+将参数 3 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 19 |	ldc.i4.3 |	将 3 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_4~~
-Pushes the integer value of 4 onto the evaluation stack as an int32.
+## Ldc_I4_4
+将参数 4 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 1A |	ldc.i4.4 |	将 4 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_5~~
-Pushes the integer value of 5 onto the evaluation stack as an int32.
+## Ldc_I4_5
+将参数 5 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 1B |	ldc.i4.5 |	将 5 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_6~~
-Pushes the integer value of 6 onto the evaluation stack as an int32.
+## Ldc_I4_6
+将参数 6 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 1C |	ldc.i4.6 |	将 6 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_7~~
-Pushes the integer value of 7 onto the evaluation stack as an int32.
+## Ldc_I4_7
+将参数 7 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 1D |	ldc.i4.7 |	将 7 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_8~~
-Pushes the integer value of 8 onto the evaluation stack as an int32.
+## Ldc_I4_8
+将参数 8 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 1E |	ldc.i4.8 |	将 8 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_M1~~
-Pushes the integer value of -1 onto the evaluation stack as an int32.
+## Ldc_I4_M1
+将参数 -1 以 int32 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 15 |	ldc.i4.m1 |	将 -1 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I4_S~~
-Pushes the supplied int8 value onto the evaluation stack as an int32, short form.
+## Ldc_I4_S
+将 int8 参数 以 int32 的类型压入 evaluation stack，-128 到 127 压入 evaluation stack 更高效。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 1F< int8 > |		ldc.i4.s num |	将 num 以 int32 的类型压入 evaluation stack|
 
-## ~~Ldc_I8~~
-Pushes a supplied value of type int64 onto the evaluation stack as an int64.
+## Ldc_I8
+将参数 num 以 int64 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 21 < int64 > |	ldc.i8 num |	将 num 以 int64 的类型压入 evaluation stack|
 
-## ~~Ldc_R4~~
-Pushes a supplied value of type float32 onto the evaluation stack as type F (float).
+## Ldc_R4
+将参数 num 以 float32 的类型压入 evaluation stackk
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 22 < float32 > |	ldc.r4 num |	将 num 以 float32 的类型压入 evaluation stack|
 
-## ~~Ldc_R8~~
-Pushes a supplied value of type float64 onto the evaluation stack as type F (float).
+## Ldc_R8
+将参数 num 以 float64 的类型压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 23 < float64 > |	ldc.r8 num |	将 num 以 float64 的类型压入 evaluation stack|
 
 ## ~~Ldelem~~
 Loads the element at a specified array index onto the top of the evaluation stack as the type specified in the instruction.
@@ -682,8 +732,11 @@ Pushes the value of a static field onto the evaluation stack.
 ## ~~Ldsflda~~
 Pushes the address of a static field onto the evaluation stack.
 
-## ~~Ldstr~~
-Pushes a new object reference to a string literal stored in the metadata.
+## Ldstr
+新建一个指向 metadata 中常量字符串的对象，并压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 72 < T > |	ldstr mdToken |	新建一个指向 metadata 中常量字符串的对象，并压入 evaluation stack|
 
 ## ~~Ldtoken~~
 Converts a metadata token to its runtime representation, pushing it onto the evaluation stack.
