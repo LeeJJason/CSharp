@@ -81,7 +81,7 @@
 - [~~Cpobj~~](#cpobj)
 - [~~Div~~](#div)
 - [~~Div_Un~~](#divun)
-- [~~Dup~~](#dup)
+- [Dup](#dup)
 - [~~Endfilter~~](#endfilter)
 - [~~Endfinally~~](#endfinally)
 - [~~Initblk~~](#initblk)
@@ -124,9 +124,9 @@
 - [~~Ldelem_U1~~](#ldelemu1)
 - [~~Ldelem_U2~~](#ldelemu2)
 - [~~Ldelem_U4~~](#ldelemu4)
-- [~~Ldfld~~](#ldfld)
-- [~~Ldflda~~](#ldflda)
-- [~~Ldftn~~](#ldftn)
+- [Ldfld](#ldfld)
+- [Ldflda](#ldflda)
+- [Ldftn](#ldftn)
 - [~~Ldind_I~~](#ldindi)
 - [~~Ldind_I1~~](#ldindi1)
 - [~~Ldind_I2~~](#ldindi2)
@@ -139,18 +139,18 @@
 - [~~Ldind_U2~~](#ldindu2)
 - [~~Ldind_U4~~](#ldindu4)
 - [~~Ldlen~~](#ldlen)
-- [~~Ldloc~~](#ldloc)
-- [~~Ldloca~~](#ldloca)
-- [~~Ldloca_S~~](#ldlocas)
-- [~~Ldloc_0~~](#ldloc0)
-- [~~Ldloc_1~~](#ldloc1)
-- [~~Ldloc_2~~](#ldloc2)
-- [~~Ldloc_3~~](#ldloc3)
-- [~~Ldloc_S~~](#ldlocs)
-- [~~Ldnull~~](#ldnull)
-- [~~Ldobj~~](#ldobj)
-- [~~Ldsfld~~](#ldsfld)
-- [~~Ldsflda~~](#ldsflda)
+- [Ldloc](#ldloc)
+- [Ldloca](#ldloca)
+- [Ldloca_S](#ldlocas)
+- [Ldloc_0](#ldloc0)
+- [Ldloc_1](#ldloc1)
+- [Ldloc_2](#ldloc2)
+- [Ldloc_3](#ldloc3)
+- [Ldloc_S](#ldlocs)
+- [Ldnull](#ldnull)
+- [Ldobj](#ldobj)
+- [Ldsfld](#ldsfld)
+- [Ldsflda](#ldsflda)
 - [Ldstr](#ldstr)
 - [~~Ldtoken~~](#ldtoken)
 - [~~Ldvirtftn~~](#ldvirtftn)
@@ -207,14 +207,14 @@
 - [~~Stind_R4~~](#stindr4)
 - [~~Stind_R8~~](#stindr8)
 - [~~Stind_Ref~~](#stindref)
-- [~~Stloc~~](#stloc)
-- [~~Stloc_0~~](#stloc0)
-- [~~Stloc_1~~](#stloc1)
-- [~~Stloc_2~~](#stloc2)
-- [~~Stloc_3~~](#stloc3)
-- [~~Stloc_S~~](#stlocs)
-- [~~Stobj~~](#stobj)
-- [~~Stsfld~~](#stsfld)
+- [Stloc](#stloc)
+- [Stloc_0](#stloc0)
+- [Stloc_1](#stloc1)
+- [Stloc_2](#stloc2)
+- [Stloc_3](#stloc3)
+- [Stloc_S](#stlocs)
+- [Stobj](#stobj)
+- [Stsfld](#stsfld)
 - [~~Sub~~](#sub)
 - [~~Sub_Ovf~~](#subovf)
 - [~~Sub_Ovf_Un~~](#subovfun)
@@ -472,9 +472,17 @@ Divides two values and pushes the result as a floating-point (type F) or quotien
 ## ~~Div_Un~~
 Divides two unsigned integer values and pushes the result (int32) onto the evaluation stack.
 
-## ~~Dup~~
-Copies the current topmost value on the evaluation stack, and then pushes the copy onto the evaluation stack.
-
+## Dup
+拷贝 evaluation stack 栈顶的值，然后压入 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|25	      |dup|复制 evaluation stack 栈顶的值。|
+* sequential order
+  1. value 已经被压入 evaluation stack。
+  2. value 弹出 evaluation stack 用于复制。
+  3. value 重新压入 evaluation stack。
+  4. 被复制的值被压入 evaluation stack。
+   
 ## ~~Endfilter~~
 Transfers control from the filter clause of an exception back to the Common Language Infrastructure (CLI) exception handler.
 
@@ -651,14 +659,31 @@ Loads the element with type unsigned int16 at a specified array index onto the t
 ## ~~Ldelem_U4~~
 Loads the element with type unsigned int32 at a specified array index onto the top of the evaluation stack as an int32.
 
-## ~~Ldfld~~
-Finds the value of a field in the object whose reference is currently on the evaluation stack.
+## Ldfld
+加载当前在 evaluation stack 中的对象的某个字段的值。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 7B < T > |	ldfld field |	将指定对象的字段值压入 evaluation stack|
+* sequential order
+  1. 某个对象被压入 evaluation stack。
+  2. 该对象被弹出 evaluation stack，该对象字段的值被发现。
+  3. 该字段的值被压入evaluation stack。
 
-## ~~Ldflda~~
-Finds the address of a field in the object whose reference is currently on the evaluation stack.
+## Ldflda
+加载当前在 evaluation stack 中的对象的某个字段的地址。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 7C < T > |	ldflda field |	将指定对象的字段地址压入 evaluation stack|
+* sequential order
+  1. 某个对象被压入 evaluation stack。
+  2. 该对象被弹出 evaluation stack，该对象字段的地址被发现。
+  3. 该字段的地址被压入evaluation stack。
 
-## ~~Ldftn~~
-Pushes an unmanaged pointer (type native int) to the native code implementing a specific method onto the evaluation stack.
+## Ldftn
+将一个指向本地代码实现的特殊方法的未托管的指针压入evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| FE 06 < T > |	ldftn method |	将指向method方法的指针压入 evaluation stack|
 
 ## ~~Ldind_I~~
 Loads a value of type native int as a native int onto the evaluation stack indirectly.
@@ -696,41 +721,82 @@ Loads a value of type unsigned int32 as an int32 onto the evaluation stack indir
 ## ~~Ldlen~~
 Pushes the number of elements of a zero-based, one-dimensional array onto the evaluation stack.
 
-## ~~Ldloc~~
-Loads the local variable at a specific index onto the evaluation stack.
+## Ldloc
+加载指定索引的局部变量到 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| FE 0C < unsigned int16 > |	ldloc index |	加载指定index处的局部变量到evaluation stack|
 
-## ~~Ldloca~~
-Loads the address of the local variable at a specific index onto the evaluation stack.
 
-## ~~Ldloca_S~~
-Loads the address of the local variable at a specific index onto the evaluation stack, short form.
+## Ldloca
+加载指定index的局部变量地址到 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| FE OD < unsigned int16 > |	ldloca index |	加载index处局部变量的地址到evaluation stack|
 
-## ~~Ldloc_0~~
-Loads the local variable at index 0 onto the evaluation stack.
+## Ldloca_S
+加载指定index（short）的局部变量地址到 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 12 < unsigned int8 > |	ldloca.s index |	加载index（short）处局部变量的地址到evaluation stack|
 
-## ~~Ldloc_1~~
-Loads the local variable at index 1 onto the evaluation stack.
+## Ldloc_0
+加载指定索引0的局部变量到 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 06 |	ldloc.0 |	加载指定索引0的局部变量到 evaluation stack|
 
-## ~~Ldloc_2~~
-Loads the local variable at index 2 onto the evaluation stack.
+## Ldloc_1
+加载指定索引1的局部变量到 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 07 |	ldloc.1 |	加载指定索引1的局部变量到 evaluation stack|
 
-## ~~Ldloc_3~~
-Loads the local variable at index 3 onto the evaluation stack.
+## Ldloc_2
+加载指定索引2的局部变量到 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 08 |	ldloc.2 |	加载指定索引2的局部变量到 evaluation stack|
 
-## ~~Ldloc_S~~
-Loads the local variable at a specific index onto the evaluation stack, short form.
+## Ldloc_3
+加载指定索引3的局部变量到 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 09 |	ldloc.3 |	加载指定索引3的局部变量到 evaluation stack|
 
-## ~~Ldnull~~
-Pushes a null reference (type O) onto the evaluation stack.
+## Ldloc_S
+加载指定index（short）的局部变量到 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|11 < unsigned int8 > |	ldloc.s index |	加载index（short）处局部变量到evaluation stack|
 
-## ~~Ldobj~~
-Copies the value type object pointed to by an address to the top of the evaluation stack.
+## Ldnull
+加载指定null(type 0)到 evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|14 |	ldnull |	加载指定null(type 0)到 evaluation stack。|
 
-## ~~Ldsfld~~
-Pushes the value of a static field onto the evaluation stack.
+## Ldobj
+拷贝由地址指向的值类型对象到evaluation stack。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|71 < T > |	ldobj class |	拷贝值类型class 实例到evaluation stack|
+* sequential order
+  1. 值类型对象的地址被压入 evaluation stack。
+  2. 地址被弹出，该地址处的实例被查找。
+  3. 存储该值类型对象的地址被压入evaluation stack。
 
-## ~~Ldsflda~~
-Pushes the address of a static field onto the evaluation stack.
+## Ldsfld
+将静态字段的值压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 7E < T > |	ldsfld field |将静态字段的值压入 evaluation stack|
+
+## Ldsflda
+将静态字段的地址压入 evaluation stack
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+| 7F < T > |	ldsflda field |将静态字段的地址压入 evaluation stack|
 
 ## Ldstr
 新建一个指向 metadata 中常量字符串的对象，并压入 evaluation stack
@@ -903,29 +969,60 @@ Stores a value of type float64 at a supplied address.
 ## ~~Stind_Ref~~
 Stores a object reference value at a supplied address.
 
-## ~~Stloc~~
-Pops the current value from the top of the evaluation stack and stores it in a the local variable list at a specified index.
+## Stloc
+弹出 evaluation stack 顶部当前的值，并存到指定的局部变量列表中指定索引位置。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|FE 0E < unsigned int16 >|stloc index|从evaluation stack中弹出顶部值存储到指定局部变量索引处|
 
-## ~~Stloc_0~~
-Pops the current value from the top of the evaluation stack and stores it in a the local variable list at index 0.
+## Stloc_0
+弹出 evaluation stack 顶部当前的值，并存到指定的局部变量列表中0索引位置。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|0A       |stloc.0|从evaluation stack中弹出顶部值存储到指定局部变量0处|
 
-## ~~Stloc_1~~
-Pops the current value from the top of the evaluation stack and stores it in a the local variable list at index 1.
+## Stloc_1
+弹出 evaluation stack 顶部当前的值，并存到指定的局部变量列表中1索引位置。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|0B       |stloc.1|从evaluation stack中弹出顶部值存储到指定局部变量1处|
 
-## ~~Stloc_2~~
-Pops the current value from the top of the evaluation stack and stores it in a the local variable list at index 2.
+## Stloc_2
+弹出 evaluation stack 顶部当前的值，并存到指定的局部变量列表中2索引位置。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|0C       |stloc.2|从evaluation stack中弹出顶部值存储到指定局部变量2处|
 
-## ~~Stloc_3~~
-Pops the current value from the top of the evaluation stack and stores it in a the local variable list at index 3.
+## Stloc_3
+弹出 evaluation stack 顶部当前的值，并存到指定的局部变量列表中3索引位置。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|0D       |stloc.3|从evaluation stack中弹出顶部值存储到指定局部变量3处|
 
-## ~~Stloc_S~~
-Pops the current value from the top of the evaluation stack and stores it in a the local variable list at index (short form).
+## Stloc_S
+弹出 evaluation stack 顶部当前的值，并存到指定的局部变量列表中index(short类型)位置。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|13 < unsigned int8 >|stloc.s index|从evaluation stack中弹出顶部值存储到指定局部变量index(short类型)处|
 
-## ~~Stobj~~
-Copies a value of a specified type from the evaluation stack into a supplied memory address.
+## Stobj
+从evaluation stack拷贝指定值类型类型的值到实际的内存地址中。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|81 < T >|stobj class|把evaluation stack上 class 类型的值存储到内存中|
+* sequential order
+  1. 地址压入 evaluation stack。
+  2. 一个class类型的值对象压入 evaluation stack。
+  3. 对象和地址弹出 evaluation stack，该值存入地址中。
 
-## ~~Stsfld~~
-Replaces the value of a static field with a value from the evaluation stack.
+## Stsfld
+通过 evaluation stack 上的值设置静态字段的值。
+| Format |	Assembly Format |	Description |
+|:--------|:------------------|:---------------|
+|80 < T >|stsfld field|使用提供的值设置field的值|
+* sequential order
+  1. 将值压入 evaluation stack
+  2. 值弹出evaluation stack，并保存到field
 
 ## ~~Sub~~
 Subtracts one value from another and pushes the result onto the evaluation stack.
