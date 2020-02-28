@@ -268,5 +268,3 @@ String[] argNames = new String[] { "lastName", "firstName" };
 t.InvokeMember("PrintName", BindingFlags.InvokeMethod, null, null, argValues, null, null, argNames);
 ```
 * `argNames` 与 `argValues` 对应。
-
-### 3.5、具名参数

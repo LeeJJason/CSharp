@@ -20,5 +20,6 @@
     * EqualityComparer 的重写
 
 ## [5. BindingFlags](BindingFlags/README.md) 
+    * InvokeMember 的用例
     * BindingFlags 的定义
     * BindingFlags 的用例
