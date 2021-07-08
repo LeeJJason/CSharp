@@ -13,14 +13,9 @@ namespace Conditional
     {
         static void Main(string[] args)
         {
-            Invoker.Run();
+            Run();
         }
-        
-    }
-    [Conditional("TRACE_ON")]
-    class Invoker
-    {
-       
+        [Conditional("TRACE_ON")]
         public static void Run()
         {
             Console.WriteLine("Run Test");
