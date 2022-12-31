@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Yeild.cs" />
     <Compile Include="Code\CoroutineManager.cs" />
     <Compile Include="Code\IWait.cs" />
     <Compile Include="Code\WaitForFrames.cs" />
     <Compile Include="Code\WaitForSeconds.cs" />
+    <Compile Include="ForEach.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
